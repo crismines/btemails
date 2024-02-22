@@ -93,10 +93,6 @@ if __name__ == "__main__":
     parser.add_argument('--port', dest='port', type=int, default=587, help='SMTP server port')
     args = parser.parse_args()
 
-    # Run the main function with command-line arguments
-    main(input_file=args.input_file, output_folder=args.output_folder,
-         server_address=args.server_address, port=args.port)
-
     # Interactive menu to add logins
     banner = """
   _______ _     _ _______     _______ _     _ _______
@@ -127,7 +123,9 @@ if __name__ == "__main__":
         choice = input("Enter your choice (1-13): ")
 
         if choice == '1':
-            # ... add logins functionality ...
+            file_path = input("Enter the path to the file containing email and password pairs: ")
+            accounts = add_login_from_file(file_path)
+            print("Added logins from file.")
         elif choice == '2':
             # ... view successful logins functionality ...
         elif choice == '3':
@@ -156,3 +154,4 @@ if __name__ == "__main__":
             # ... change log level functionality ...
         else:
             print("Invalid choice. Please enter a number between 1 and 13.")
+
