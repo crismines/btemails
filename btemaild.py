@@ -27,9 +27,18 @@ def add_login_from_file(file_path):
         print(f"File not found: {file_path}")
         return []
 
+def view_log_file(log_file_path='email_checker.log'):
+    try:
+        with open(log_file_path, 'r') as log_file:
+            content = log_file.read()
+            print(content)
+    except FileNotFoundError:
+        print(f"Log file not found: {log_file_path}")
+
 def main(input_file=None, output_folder='output', server_address='mail.btinternet.com', port=587):
     # Configure logging
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, filename='email_checker.log', filemode='a',
+                        format='%(asctime)s - %(levelname)s - %(message)s')
 
     # Step 1: Get the script's directory
     script_directory = os.path.dirname(os.path.abspath(__file__))
@@ -111,43 +120,39 @@ if __name__ == "__main__":
         print("8. Export Results")
         print("9. Help")
         print("10. Exit")
+        print("11. Add and Start Searching")
+        print("12. View Log File")
+        print("13. Change Log Level")
 
-        choice = input("Enter your choice (1-10): ")
+        choice = input("Enter your choice (1-13): ")
 
         if choice == '1':
-            file_path = input("Enter the path to the file containing email and password pairs: ")
-            accounts = add_login_from_file(file_path)
-            print("Added logins from file.")
+            # ... add logins functionality ...
         elif choice == '2':
-            # Add functionality to view successful logins
-            pass
+            # ... view successful logins functionality ...
         elif choice == '3':
-            # Add functionality to view filtered logins
-            pass
+            # ... view filtered logins functionality ...
         elif choice == '4':
-            output_folder = input("Enter new output folder: ")
-            print(f"Output folder updated to: {output_folder}")
+            # ... change output folder functionality ...
         elif choice == '5':
-            server_address = input("Enter new SMTP server address: ")
-            port = int(input("Enter new SMTP server port: "))
-            print(f"SMTP server configured to: {server_address}:{port}")
+            # ... configure SMTP server functionality ...
         elif choice == '6':
-            # Add functionality to modify search keywords
-            pass
+            # ... modify search keywords functionality ...
         elif choice == '7':
-            successful_logins = []  # Clear the list of successful logins
-            print("Successful logins cleared.")
+            # ... clear logins functionality ...
         elif choice == '8':
-            # Add functionality to export results
-            pass
+            # ... export results functionality ...
         elif choice == '9':
-            # Display help information
-            print("\nEmail Login Checker Help:")
-            print("This script checks email logins and provides various options to manage logins.")
-            print("...")
+            # ... display help information ...
         elif choice == '10':
             print("Exiting. Thank you!")
             break
+        elif choice == '11':
+            main(input_file=args.input_file, output_folder=args.output_folder,
+                 server_address=args.server_address, port=args.port)
+        elif choice == '12':
+            view_log_file()
+        elif choice == '13':
+            # ... change log level functionality ...
         else:
-            print("Invalid choice. Please enter a number between 1 and 10.")
-
+            print("Invalid choice. Please enter a number between 1 and 13.")
