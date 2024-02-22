@@ -19,9 +19,14 @@ def save_to_file(logins, keyword, output_folder='output'):
             f.write(f"{login}\n")
 
 def add_login():
-    email = input("Enter email: ")
-    password = input("Enter password: ")
-    return email, password
+    logins = []
+    while True:
+        email = input("Enter email (or 'done' to finish): ")
+        if email.lower() == 'done':
+            break
+        password = input("Enter password: ")
+        logins.append((email, password))
+    return logins
 
 def main(input_file=None, output_folder='output', server_address='mail.btinternet.com', port=587):
     # Configure logging
@@ -112,8 +117,9 @@ if __name__ == "__main__":
         choice = input("Enter your choice (1-10): ")
 
         if choice == '1':
-            email, password = add_login()
-            print(f"Added: Email - {email}, Password - {password}")
+            logins = add_login()
+            for email, password in logins:
+                print(f"Added: Email - {email}, Password - {password}")
         elif choice == '2':
             # Add functionality to view successful logins
             pass
