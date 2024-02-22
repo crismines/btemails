@@ -128,20 +128,28 @@ if __name__ == "__main__":
             print("Added logins from file.")
         elif choice == '2':
             # ... view successful logins functionality ...
+            pass
         elif choice == '3':
             # ... view filtered logins functionality ...
+            pass
         elif choice == '4':
             # ... change output folder functionality ...
+            pass
         elif choice == '5':
             # ... configure SMTP server functionality ...
+            pass
         elif choice == '6':
             # ... modify search keywords functionality ...
+            pass
         elif choice == '7':
             # ... clear logins functionality ...
+            pass
         elif choice == '8':
             # ... export results functionality ...
+            pass
         elif choice == '9':
             # ... display help information ...
+            pass
         elif choice == '10':
             print("Exiting. Thank you!")
             break
@@ -152,6 +160,8 @@ if __name__ == "__main__":
             view_log_file()
         elif choice == '13':
             # ... change log level functionality ...
+            pass
         else:
             print("Invalid choice. Please enter a number between 1 and 13.")
+
 
