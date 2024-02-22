@@ -1,0 +1,14 @@
+# .gitignore
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+
+# Output folders
+output/
+
+# Configuration files (if any)
+config.ini
