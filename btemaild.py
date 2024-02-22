@@ -18,15 +18,14 @@ def save_to_file(logins, keyword, output_folder='output'):
         for login in logins:
             f.write(f"{login}\n")
 
-def add_login():
-    logins = []
-    while True:
-        email = input("Enter email (or 'done' to finish): ")
-        if email.lower() == 'done':
-            break
-        password = input("Enter password: ")
-        logins.append((email, password))
-    return logins
+def add_login_from_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            accounts = [line.strip().split(',') for line in file if ',' in line]
+        return accounts
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        return []
 
 def main(input_file=None, output_folder='output', server_address='mail.btinternet.com', port=587):
     # Configure logging
@@ -47,9 +46,8 @@ def main(input_file=None, output_folder='output', server_address='mail.btinterne
 
     # Step 5: Read email accounts from the input file
     try:
-        with open(input_file, 'r') as f:
-            # Filter out lines without a comma to handle unexpected lines
-            accounts = [line.strip().split(',') for line in f if ',' in line]
+        # Read email accounts from the file
+        accounts = add_login_from_file(input_file)
 
         successful_logins = []
 
@@ -103,7 +101,7 @@ if __name__ == "__main__":
 
     while True:
         print("\nMenu:")
-        print("1. Add Login")
+        print("1. Add Login from File")
         print("2. View Successful Logins")
         print("3. View Filtered Logins")
         print("4. Change Output Folder")
@@ -117,9 +115,9 @@ if __name__ == "__main__":
         choice = input("Enter your choice (1-10): ")
 
         if choice == '1':
-            logins = add_login()
-            for email, password in logins:
-                print(f"Added: Email - {email}, Password - {password}")
+            file_path = input("Enter the path to the file containing email and password pairs: ")
+            accounts = add_login_from_file(file_path)
+            print("Added logins from file.")
         elif choice == '2':
             # Add functionality to view successful logins
             pass
@@ -152,3 +150,4 @@ if __name__ == "__main__":
             break
         else:
             print("Invalid choice. Please enter a number between 1 and 10.")
+
